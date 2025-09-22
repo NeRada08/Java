@@ -15,4 +15,9 @@
         android:name="com.example.myapplication.Branch2Fragment"
         android:label="fragment_branch2"
         tools:layout="@layout/fragment_branch2" />
+    <fragment
+        android:id="@+id/mondayCountFragment"
+        android:name="com.example.myapplication.MondayCountFragment"
+        android:label="fragment_monday_count"
+        tools:layout="@layout/fragment_monday_count" />
 </navigation>
