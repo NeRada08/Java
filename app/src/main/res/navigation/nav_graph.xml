@@ -10,4 +10,9 @@
         android:name="com.example.myapplication.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/branch2Fragment"
+        android:name="com.example.myapplication.Branch2Fragment"
+        android:label="fragment_branch2"
+        tools:layout="@layout/fragment_branch2" />
 </navigation>

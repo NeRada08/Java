@@ -6,7 +6,7 @@
         android:title="Ветка 1"
         app:showAsAction="never"
         />
-    <item android:id="@+id/third"
+    <item android:id="@+id/.Branch2Fragment"
         android:title="Ветка 2"
         app:showAsAction="never"
         />
