@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Branch2Fragment">
+
+<!-- 1. Ввод расписания в формате: день,HH:mm; день,HH:mm; ... -->
+<EditText
+    android:id="@+id/etSchedule"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Например: вторник,15:30; среда,20:30; пятница,17:00"
+    android:inputType="textMultiLine"/>
+
+<!-- 2. Выбор начала интервала (день недели + время) -->
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Начало интервала"
+    android:layout_marginTop="12dp"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Spinner
+        android:id="@+id/spStartDay"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+
+    <TimePicker
+        android:id="@+id/tpStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"
+        android:layout_marginStart="8dp"/>
+</LinearLayout>
+
+<!-- 3. Выбор конца интервала (день недели + время) -->
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Конец интервала"
+    android:layout_marginTop="12dp"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Spinner
+        android:id="@+id/spEndDay"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+
+    <TimePicker
+        android:id="@+id/tpEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"
+        android:layout_marginStart="8dp"/>
+</LinearLayout>
+
+<!-- 4. Кнопка запуска фильтрации -->
+<Button
+    android:id="@+id/btnShow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Показать занятия"
+    android:layout_marginTop="16dp"/>
+
+<!-- 5. Результат -->
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginTop="12dp">
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"/>
+</ScrollView>
+</LinearLayout>
