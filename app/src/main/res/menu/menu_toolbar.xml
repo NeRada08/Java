@@ -16,5 +16,9 @@
         app:showAsAction="always"
         />
 
+    <item android:id="@+id/branch3Fragment"
+        android:title="Ветка 3"
+        app:showAsAction="never"
+        />
 
 </menu>
