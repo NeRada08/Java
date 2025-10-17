@@ -1,64 +1,74 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Branch3Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class Branch3Fragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Calendar selectedCalendar;
 
     public Branch3Fragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Branch3Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Branch3Fragment newInstance(String param1, String param2) {
         Branch3Fragment fragment = new Branch3Fragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("param1", param1);
+        args.putString("param2", param2);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_branch3, container, false);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_branch3, container, false);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        DatePicker datePicker = view.findViewById(R.id.datePicker);
+        TextView textViewResult = view.findViewById(R.id.textViewResult);
+
+        datePicker.init(
+                datePicker.getYear(),
+                datePicker.getMonth(),
+                datePicker.getDayOfMonth(),
+                (view1, year, monthOfYear, dayOfMonth) -> {
+                    selectedCalendar = Calendar.getInstance();
+                    selectedCalendar.set(Calendar.YEAR, year);
+                    selectedCalendar.set(Calendar.MONTH, monthOfYear);
+
+                    int daysInMonth = selectedCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+                    StringBuilder saturdays = new StringBuilder();
+
+                    for (int day = 1; day <= daysInMonth; day++) {
+                        selectedCalendar.set(Calendar.DAY_OF_MONTH, day);
+                        int dayOfWeek = selectedCalendar.get(Calendar.DAY_OF_WEEK);
+                        if (dayOfWeek == Calendar.SATURDAY) {
+                            String formattedDate = sdf.format(selectedCalendar.getTime());
+                            saturdays.append(formattedDate).append("\n");
+                        }
+                    }
+
+                    textViewResult.setText("Субботы в " + (monthOfYear + 1) + "/" + year + ":\n" + saturdays.toString());
+                }
+        );
     }
 }
